@@ -1,4 +1,11 @@
 
+package javaflix;
+
+import javaflix.model.Program;
+import javaflix.model.User;
+import javaflix.service.Programs;
+import javaflix.service.Users;
+import javaflix.ui.LogIn;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.*;
@@ -10,16 +17,12 @@ import java.io.*;
 public class Main extends Thread{
 
     public static void main(String[] args) throws InterruptedException,IOException {
-        Programs programs = new Programs();
-        int l = 0;
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("programs.dat"))) {
-            int i = 1;
             Program program = null;
             do {
                 try {
                     program = (Program) in.readObject();
-                    programs.ProgramCatalog.put(i, program);
-                    i++;
+                    Programs.addProgram(program);
                 } catch (EOFException exc) {
                     break;
                 }
@@ -29,15 +32,12 @@ public class Main extends Thread{
         } catch (ClassNotFoundException e) {
             System.out.println(e);
         }
-        Users users = new Users();
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("users.dat"))) {
-            int i = 1;
             User user = null;
             do {
                 try {
                     user = (User) in.readObject();
-                    users.UserCatalog.put(i, user);
-                    i++;
+                    Users.addUser(user);
                 } catch (EOFException exc) {
                     break;
                 }
@@ -56,7 +56,7 @@ public class Main extends Thread{
             {
                 try (ObjectOutputStream out = new ObjectOutputStream(
                         new FileOutputStream("users.dat"))) {
-                    for (User user : users.UserCatalog.values()) {
+                    for (User user : Users.getAllUsers()) {
                         out.writeObject(user);
                     }
                 }
@@ -65,7 +65,7 @@ public class Main extends Thread{
                 }
                 try (ObjectOutputStream out = new ObjectOutputStream(
                         new FileOutputStream("programs.dat"))) {
-                    for (Program program : programs.ProgramCatalog.values()) {
+                    for (Program program : Programs.getAllPrograms()) {
                         out.writeObject(program);
                     }
                 }
@@ -78,6 +78,4 @@ public class Main extends Thread{
     }
 
 }
-
-
 

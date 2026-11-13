@@ -1,6 +1,10 @@
 # Compiled class file
 *.class
 
+# Local build and test-data directories
+/out/
+/run-data/
+
 # Log file
 *.log
 

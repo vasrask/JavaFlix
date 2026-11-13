@@ -1,5 +1,9 @@
 
+package javaflix.service;
+
+import javaflix.model.User;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -10,6 +14,10 @@ import java.util.HashMap;
 public class Users extends Programs implements Serializable {
 
     protected static HashMap<Integer, User> UserCatalog = new HashMap<>();
+
+    public static ArrayList<User> getAllUsers() {
+        return new ArrayList<>(UserCatalog.values());
+    }
 
     /**
      * Adds a user to the platform.

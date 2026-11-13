@@ -1,3 +1,7 @@
+package javaflix.ui;
+
+import javaflix.model.*;
+import javaflix.service.Programs;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -178,7 +182,7 @@ public class AdminMenu <T extends Program> extends JFrame {
                 new ArrayList<>()   // User reviews (empty for now)
         );
 
-        boolean exists = Programs.ProgramCatalog.values().stream()
+        boolean exists = Programs.getAllPrograms().stream()
                 .anyMatch(p -> p.getTitle().equals(movie.getTitle()));
 
         if (!exists) {
@@ -202,7 +206,7 @@ public class AdminMenu <T extends Program> extends JFrame {
                 new ArrayList<Program>() // More like this (empty for now)
         );
 
-        boolean exists = Programs.ProgramCatalog.values().stream()
+        boolean exists = Programs.getAllPrograms().stream()
                 .anyMatch(p -> p.getTitle().equals(series.getTitle()));
 
         if (!exists) {

@@ -1,4 +1,6 @@
 
+package javaflix.model;
+
 import java.util.ArrayList;
 import java.util.Objects;
 

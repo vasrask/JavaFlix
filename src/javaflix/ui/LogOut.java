@@ -1,3 +1,5 @@
+package javaflix.ui;
+
 import javax.swing.*;
 
 public class LogOut extends JFrame {

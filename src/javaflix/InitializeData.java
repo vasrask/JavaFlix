@@ -1,3 +1,8 @@
+package javaflix;
+
+import javaflix.model.*;
+import javaflix.service.Programs;
+import javaflix.service.Users;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;

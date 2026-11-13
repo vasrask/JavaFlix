@@ -1,3 +1,7 @@
+package javaflix.ui;
+
+import javaflix.model.User;
+import javaflix.service.Users;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;

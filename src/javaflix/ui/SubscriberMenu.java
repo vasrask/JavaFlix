@@ -1,3 +1,8 @@
+package javaflix.ui;
+
+import javaflix.model.Program;
+import javaflix.model.User;
+import javaflix.service.Programs;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -40,7 +45,7 @@ public class SubscriberMenu extends JFrame {
 
     private void initializeUserFavorites() {
         ArrayList<Program> faves = new ArrayList<>(user.getFavorites());
-        faves.removeIf(fav -> !Programs.ProgramCatalog.containsValue(fav));
+        faves.removeIf(fav -> !Programs.getAllPrograms().contains(fav));
         user.setFavorites(faves);
     }
 
@@ -48,4 +53,3 @@ public class SubscriberMenu extends JFrame {
         new SubscriberMenu(user);
     }
 }
-

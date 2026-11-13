@@ -1,3 +1,5 @@
+package javaflix.model;
+
 import java.io.Serializable;
 
 /**
@@ -36,4 +38,3 @@ public enum Genres implements Serializable {
         }
     }
 }
-

@@ -1,4 +1,7 @@
 
+package javaflix.service;
+
+import javaflix.model.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +17,10 @@ import java.util.Map;
 public class Programs implements Serializable {
 
     static HashMap<Integer, Program> ProgramCatalog = new HashMap<>();
+
+    public static ArrayList<Program> getAllPrograms() {
+        return new ArrayList<>(ProgramCatalog.values());
+    }
 
     /**
      * Adds a program to the catalog.

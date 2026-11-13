@@ -1,3 +1,7 @@
+package javaflix.ui;
+
+import javaflix.model.*;
+import javaflix.service.Programs;
 import javax.swing.*;
 import java.util.ArrayList;
 
