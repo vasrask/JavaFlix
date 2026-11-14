@@ -12,13 +12,14 @@ JavaFlix is a Java Swing desktop application that simulates a simplified streami
 
 ### Requirements
 - Java 17+
+- Maven 3.8+ (for tests)
 
 ### Command line compilation
 
 From the project root, compile all Java sources:
 
 ```powershell
-javac -d out (Get-ChildItem src -Recurse -Filter *.java | ForEach-Object FullName)
+javac -d out (Get-ChildItem src/javaflix -Recurse -Filter *.java | ForEach-Object FullName)
 ```
 
 ### Run
@@ -42,6 +43,14 @@ This will create `users.dat` and `programs.dat`.
 After generating the data files:
 ```
 java -cp out javaflix.Main
+```
+
+### Tests
+
+Run the automated model and catalog tests from the project root:
+
+```powershell
+mvn test
 ```
 
 ## Author

@@ -5,6 +5,7 @@ import javaflix.model.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -68,20 +69,14 @@ public class Programs implements Serializable {
      */
     public static ArrayList<Program> returnProgramOfTitle(String title) {
         ArrayList<Program> programs = new ArrayList<>();
-        boolean FoundProgram = false;
-        String lowerCaseTitle = title.toLowerCase();
+        String lowerCaseTitle = title.toLowerCase(Locale.ROOT);
         for (Program program : ProgramCatalog.values()) {
-            String programTitle = program.getTitle().toLowerCase();
+            String programTitle = program.getTitle().toLowerCase(Locale.ROOT);
             if (programTitle.contains(lowerCaseTitle)) {
-                FoundProgram = true;
                 programs.add(program);
             }
         }
-        if (!FoundProgram) {
-            return null;
-        } else {
-            return programs;
-        }
+        return programs.isEmpty() ? null : programs;
     }
     /**
      * Returns all programs of the given year.
@@ -214,28 +209,43 @@ public class Programs implements Serializable {
      *
      */
     public static ArrayList<Program> returnProgramsByMultipleFilters(String title, MaturityRatings maturityRating, int year, Genres genre, String actor,int stars) {
-        if (!title.isEmpty()) {
-            return returnProgramOfTitle(title);
+        boolean hasFilter = !title.isEmpty() || maturityRating != null || year != 0
+                || genre != null || !actor.isEmpty() || stars != 0;
+        if (!hasFilter) {
+            return null;
         }
-        else if (!(maturityRating == null)) {
-            return returnProgramsOfMaturityRating(maturityRating);
+
+        ArrayList<Program> matches = new ArrayList<>();
+        String normalizedTitle = title.toLowerCase(Locale.ROOT);
+        for (Program program : ProgramCatalog.values()) {
+            if (!normalizedTitle.isEmpty()
+                    && !program.getTitle().toLowerCase(Locale.ROOT).contains(normalizedTitle)) {
+                continue;
+            }
+            if (maturityRating != null && program.getMaturityRating() != maturityRating) {
+                continue;
+            }
+            if (year != 0 && !matchesYear(program, year)) {
+                continue;
+            }
+            if (genre != null && program.getGenre() != genre) {
+                continue;
+            }
+            if (!actor.isEmpty() && !program.getMainCast().contains(actor)) {
+                continue;
+            }
+            if (stars != 0 && program.getNumberOfStars() < stars) {
+                continue;
+            }
+            matches.add(program);
         }
-        else if (!(year == 0)) {
-            return returnProgramsOfYear(year);
-        }
-        else if (!(genre == null))
-        {
-            return returnProgramsOfGenre(genre);
-        }
-        else if (!actor.equals(""))
-        {
-            return returnProgramsWithActor(actor);
-        }
-        else if (!(stars == 0))
-        {
-            return returnProgramsWithReview(stars);
-        }
-        return null;
+        return matches.isEmpty() ? null : matches;
+    }
+
+    private static boolean matchesYear(Program program, int year) {
+        return program instanceof Series
+                ? ((Series) program).isYearInAnyRange(year)
+                : program.getYear() == year;
     }
     /**
      *

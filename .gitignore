@@ -4,6 +4,7 @@
 # Local build and test-data directories
 /out/
 /run-data/
+/target/
 
 # Log file
 *.log
