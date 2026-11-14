@@ -21,11 +21,15 @@ public class AddReview extends JFrame {
     public static Review review;
 
     public AddReview(Program program, User user) {
+        this(program, user, null);
+    }
+
+    public AddReview(Program program, User user, Runnable onSave) {
         setupFrame( program.getTitle());
         initializeComponents();
 
         JPanel mainPanel = createMainPanel();
-        addComponentsToPanel(mainPanel,  program, user);
+        addComponentsToPanel(mainPanel, program, user, onSave);
 
         add(mainPanel, BorderLayout.PAGE_START);
         setVisible(true);
@@ -67,7 +71,7 @@ public class AddReview extends JFrame {
         return panel;
     }
 
-    private void addComponentsToPanel(JPanel panel, Program  program, User user) {
+    private void addComponentsToPanel(JPanel panel, Program program, User user, Runnable onSave) {
         panel.add(starsLabel);
         panel.add(starPanel);
         panel.add(reviewTextLabel);
@@ -79,6 +83,9 @@ public class AddReview extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 review = new Review(getSelectedStars(), reviewTextField.getText(), user);
                 program.addReview(review);
+                if (onSave != null) {
+                    onSave.run();
+                }
                 dispose();
             }
         });
