@@ -24,6 +24,7 @@ public class SearchPrograms extends JFrame {
     private JCheckBox[] maturityCheckboxes;
     private JCheckBox[] genreCheckboxes;
     private JCheckBox[] reviewCheckboxes;
+    private JLabel validationLabel;
     private User user;
     private JTabbedPane pane;
 
@@ -166,9 +167,11 @@ public class SearchPrograms extends JFrame {
     }
 
     private JPanel createSearchActions() {
-        JPanel actions = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
+        JPanel actions = new JPanel(new BorderLayout(8, 0));
         actions.setOpaque(false);
 
+        validationLabel = new JLabel(" ");
+        validationLabel.setForeground(new Color(180, 45, 45));
         JButton resetButton = new JButton("Reset");
         resetButton.addActionListener(e -> resetFilters());
 
@@ -176,8 +179,12 @@ public class SearchPrograms extends JFrame {
         searchButton.setFont(searchButton.getFont().deriveFont(Font.BOLD));
         searchButton.addActionListener(e -> searchFilters());
 
-        actions.add(resetButton);
-        actions.add(searchButton);
+        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
+        buttons.setOpaque(false);
+        buttons.add(resetButton);
+        buttons.add(searchButton);
+        actions.add(validationLabel, BorderLayout.CENTER);
+        actions.add(buttons, BorderLayout.EAST);
         return actions;
     }
 
@@ -188,6 +195,7 @@ public class SearchPrograms extends JFrame {
         clearCheckboxes(maturityCheckboxes);
         clearCheckboxes(genreCheckboxes);
         clearCheckboxes(reviewCheckboxes);
+        validationLabel.setText(" ");
         showMessage("Ready to browse", "Enter a title or choose a filter to find something to watch.");
     }
 
@@ -203,11 +211,19 @@ public class SearchPrograms extends JFrame {
             try {
                 year = Integer.parseInt(yearField.getText().trim());
             } catch (NumberFormatException exception) {
-                JOptionPane.showMessageDialog(searchPanel, "Enter a valid year.", "Invalid year", JOptionPane.WARNING_MESSAGE);
+                validationLabel.setText("Enter a valid year.");
                 yearField.requestFocusInWindow();
+                yearField.selectAll();
+                return;
+            }
+            if (year < 1) {
+                validationLabel.setText("Year must be greater than zero.");
+                yearField.requestFocusInWindow();
+                yearField.selectAll();
                 return;
             }
         }
+        validationLabel.setText(" ");
 
         ArrayList<Program> programs = Programs.returnProgramsByMultipleFilters(
                 titleField.getText().trim(),

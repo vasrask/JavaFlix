@@ -7,26 +7,21 @@ import javaflix.service.Users;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
  * @author Vasiliki Raskopoulou
  */
-public class LogIn extends JFrame{
+public class LogIn extends JFrame {
 
-    private static JLabel usernameLabel;
-    private JLabel passwordLabel;
     private JLabel failedLabel;
     private JTextField usernameField;
     private JPasswordField passwordField;
-    private JButton loginButton;
-    private JButton registerButton;
 
     public LogIn() {
         setTitle("JavaFlix");
-        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(350, 200);
         setResizable(true);
@@ -38,82 +33,100 @@ public class LogIn extends JFrame{
         panel1.setBorder(border);
 
 
-        usernameLabel = new JLabel("Username:");
+        JLabel usernameLabel = new JLabel("Username:");
         panel1.add(usernameLabel);
-        usernameField = new JTextField("");
-        usernameField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loginCheck();
-            }
-        });
+        usernameField = new JTextField();
+        usernameField.addActionListener(e -> loginCheck());
+        usernameField.getDocument().addDocumentListener(createFeedbackListener());
         panel1.add(usernameField);
 
-        passwordLabel = new JLabel("Password:");
+        JLabel passwordLabel = new JLabel("Password:");
         panel1.add(passwordLabel);
-        passwordField = new JPasswordField("");
-        passwordField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loginCheck();
-            }
-        });
+        passwordField = new JPasswordField();
+        passwordField.addActionListener(e -> loginCheck());
+        passwordField.getDocument().addDocumentListener(createFeedbackListener());
         panel1.add(passwordField);
 
-        failedLabel = new JLabel("Login failed");
+        failedLabel = new JLabel(" ");
+        failedLabel.setForeground(new Color(180, 45, 45));
         failedLabel.setVisible(false);
         panel1.add(failedLabel);
 
-        loginButton = new JButton();
-        loginButton.setText("Login");
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loginCheck();
-            }
-        });
+        JButton loginButton = new JButton("Login");
+        loginButton.addActionListener(e -> loginCheck());
         panel1.add(loginButton);
+        getRootPane().setDefaultButton(loginButton);
 
         add(panel1, BorderLayout.CENTER);
 
         JPanel panel2 = new JPanel();
 
-        registerButton = new JButton();
-        registerButton.setText("Register");
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Register();
-                dispose();
-            }
+        JButton registerButton = new JButton("Register");
+        registerButton.addActionListener(e -> {
+            new Register();
+            dispose();
         });
         panel2.add(registerButton);
 
         add(panel2, BorderLayout.PAGE_END);
 
+        setLocationRelativeTo(null);
         setVisible(true);
-
     }
 
+    private DocumentListener createFeedbackListener() {
+        return new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent event) {
+                clearFeedback();
+            }
 
-    public void loginCheck () {
-        String username = usernameField.getText();
-        String password = String.valueOf((passwordField.getPassword()));
+            @Override
+            public void removeUpdate(DocumentEvent event) {
+                clearFeedback();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent event) {
+                clearFeedback();
+            }
+        };
+    }
+
+    private void clearFeedback() {
+        failedLabel.setText(" ");
+        failedLabel.setVisible(false);
+    }
+
+    public void loginCheck() {
+        String username = usernameField.getText().trim();
+        String password = new String(passwordField.getPassword());
+
+        if (username.isEmpty() || password.isEmpty()) {
+            failedLabel.setText("Enter both your username and password.");
+            failedLabel.setVisible(true);
+            return;
+        }
 
         User user = Users.loginUser(username, password);
         if (user == null) {
+            failedLabel.setText("Username or password is incorrect.");
             failedLabel.setVisible(true);
+            passwordField.requestFocusInWindow();
+            passwordField.selectAll();
+            return;
         }
+
         if (user.getCategory() == UserCategory.SUBSCRIBER) {
             new SubscriberMenu(user);
         } else if (user.getCategory() == UserCategory.ADMIN) {
             new AdminMenu(user);
-            failedLabel.setVisible(true);
         } else {
+            failedLabel.setText("This account type cannot sign in.");
             failedLabel.setVisible(true);
+            return;
         }
         dispose();
-
     }
 
     public static void main(String[] args) {
