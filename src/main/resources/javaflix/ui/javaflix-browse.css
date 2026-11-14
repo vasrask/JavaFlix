@@ -1,0 +1,329 @@
+.app-root {
+    -fx-background-color: #0B1020;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.top-bar {
+    -fx-background-color: #0D1426;
+    -fx-padding: 18 42 18 42;
+    -fx-border-color: transparent transparent #202A40 transparent;
+}
+
+.brand {
+    -fx-text-fill: #F5C451;
+    -fx-font-size: 19px;
+    -fx-font-weight: 900;
+}
+
+.section-label {
+    -fx-text-fill: #D7DEEB;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #C4CDDD;
+    -fx-font-size: 13px;
+    -fx-padding: 8 10 8 10;
+    -fx-cursor: hand;
+}
+
+.nav-button:hover {
+    -fx-text-fill: #F5C451;
+}
+
+.content-scroll,
+.content-scroll > .viewport {
+    -fx-background-color: #0B1020;
+    -fx-border-color: transparent;
+}
+
+.browse-content {
+    -fx-background-color: #0B1020;
+}
+
+.eyebrow {
+    -fx-text-fill: #F5C451;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+.headline {
+    -fx-text-fill: #F2F5FB;
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+}
+
+.subtitle {
+    -fx-text-fill: #98A5BC;
+    -fx-font-size: 14px;
+}
+
+.discovery-panel {
+    -fx-padding: 18;
+    -fx-background-color: #111A2D;
+    -fx-background-radius: 12;
+    -fx-border-color: #202C44;
+    -fx-border-radius: 12;
+}
+
+.search-field {
+    -fx-pref-height: 42px;
+    -fx-background-color: #0B1020;
+    -fx-background-radius: 7;
+    -fx-border-color: #2A3650;
+    -fx-border-radius: 7;
+    -fx-text-fill: #F2F5FB;
+    -fx-prompt-text-fill: #75839D;
+    -fx-padding: 0 13 0 13;
+}
+
+.text-field,
+.password-field,
+.text-area {
+    -fx-background-color: #0B1020;
+    -fx-background-radius: 7;
+    -fx-border-color: #2A3650;
+    -fx-border-radius: 7;
+    -fx-text-fill: #F2F5FB;
+    -fx-prompt-text-fill: #75839D;
+    -fx-highlight-fill: #F5C451;
+    -fx-highlight-text-fill: #211A0B;
+    -fx-padding: 10 12 10 12;
+}
+
+.text-area .content {
+    -fx-background-color: #0B1020;
+}
+
+.text-area {
+    -fx-padding: 0;
+}
+
+.filter-combo {
+    -fx-pref-height: 36px;
+    -fx-background-color: #182238;
+    -fx-background-radius: 6;
+    -fx-border-color: #2A3650;
+    -fx-border-radius: 6;
+}
+
+.filter-combo > .list-cell {
+    -fx-text-fill: #D7DEEB;
+    -fx-background-color: transparent;
+}
+
+.filter-combo .arrow {
+    -fx-background-color: #AEB9CC;
+}
+
+.combo-box-base {
+    -fx-text-fill: #D7DEEB;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #182238;
+    -fx-border-color: #2A3650;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: #182238;
+    -fx-text-fill: #D7DEEB;
+}
+
+.combo-box-popup .list-cell:hover,
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #293650;
+}
+
+.primary-button,
+.card-button {
+    -fx-background-color: #F5C451;
+    -fx-background-radius: 7;
+    -fx-text-fill: #211A0B;
+    -fx-font-weight: bold;
+    -fx-padding: 10 18 10 18;
+    -fx-cursor: hand;
+}
+
+.primary-button:hover,
+.card-button:hover {
+    -fx-background-color: #FFD66F;
+}
+
+.secondary-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 6;
+    -fx-border-color: #34415D;
+    -fx-border-radius: 6;
+    -fx-text-fill: #C4CDDD;
+    -fx-padding: 8 14 8 14;
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #1A253B;
+}
+
+.auth-background {
+    -fx-background-color: #0B1020;
+    -fx-padding: 36;
+}
+
+.auth-card,
+.form-card {
+    -fx-padding: 28;
+    -fx-background-color: #111A2D;
+    -fx-background-radius: 12;
+    -fx-border-color: #202C44;
+    -fx-border-radius: 12;
+}
+
+.auth-card {
+    -fx-pref-width: 420;
+}
+
+.field-group > .label {
+    -fx-text-fill: #C4CDDD;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.validation-message {
+    -fx-text-fill: #FF9B9B;
+    -fx-font-size: 12px;
+}
+
+.details-content {
+    -fx-background-color: #111A2D;
+    -fx-padding: 18;
+}
+
+.details-content > .label {
+    -fx-text-fill: #D7DEEB;
+}
+
+.section-title {
+    -fx-text-fill: #F2F5FB;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.result-count {
+    -fx-text-fill: #98A5BC;
+    -fx-font-size: 12px;
+}
+
+.catalog-grid {
+    -fx-padding: 2 0 0 0;
+}
+
+.catalog-card {
+    -fx-padding: 12;
+    -fx-background-color: #151D31;
+    -fx-background-radius: 10;
+    -fx-border-color: #202C44;
+    -fx-border-radius: 10;
+}
+
+.catalog-card:hover {
+    -fx-border-color: #56617A;
+    -fx-translate-y: -2;
+}
+
+.poster-placeholder {
+    -fx-background-color: linear-gradient(to bottom right, #273858, #141B2D 72%);
+    -fx-background-radius: 7;
+    -fx-border-color: #34415D;
+    -fx-border-radius: 7;
+}
+
+.poster-monogram {
+    -fx-text-fill: rgba(245, 196, 81, 0.88);
+    -fx-font-size: 38px;
+    -fx-font-weight: 900;
+}
+
+.poster-type {
+    -fx-text-fill: #D4DCEC;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+}
+
+.card-title {
+    -fx-text-fill: #F2F5FB;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.card-metadata {
+    -fx-text-fill: #98A5BC;
+    -fx-font-size: 12px;
+}
+
+.card-rating {
+    -fx-text-fill: #F5C451;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.empty-state {
+    -fx-text-fill: #AEB9CC;
+    -fx-font-size: 14px;
+    -fx-padding: 28 0 28 0;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: #0B1020;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #34415D;
+    -fx-background-radius: 5;
+}
+
+.javaflix-dialog {
+    -fx-background-color: #111A2D;
+    -fx-border-color: #34415D;
+    -fx-border-width: 1;
+}
+
+.javaflix-dialog > .header-panel {
+    -fx-background-color: #111A2D;
+}
+
+.javaflix-dialog > .header-panel > .label,
+.javaflix-dialog .label {
+    -fx-text-fill: #D7DEEB;
+}
+
+.javaflix-dialog > .content,
+.javaflix-dialog > .content.label {
+    -fx-background-color: #111A2D;
+}
+
+.javaflix-dialog > .button-bar > .container {
+    -fx-background-color: #111A2D;
+}
+
+.javaflix-dialog .button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 6;
+    -fx-border-color: #34415D;
+    -fx-border-radius: 6;
+    -fx-text-fill: #C4CDDD;
+    -fx-padding: 8 14 8 14;
+    -fx-cursor: hand;
+}
+
+.javaflix-dialog .button:hover {
+    -fx-background-color: #1A253B;
+}
+
+.javaflix-dialog .button.primary-button {
+    -fx-background-color: #F5C451;
+    -fx-border-color: transparent;
+    -fx-text-fill: #211A0B;
+    -fx-font-weight: bold;
+}

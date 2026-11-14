@@ -1,49 +1,38 @@
 # JavaFlix
-JavaFlix is a Java Swing desktop application that simulates a simplified streaming platform.
+JavaFlix is a JavaFX desktop application that simulates a simplified streaming platform.
 
 ## Project structure
 
 - `src/javaflix/` contains the application entry points.
 - `src/javaflix/model/` contains domain objects such as movies, series, and users.
 - `src/javaflix/service/` contains catalog and user operations.
-- `src/javaflix/ui/` contains the Swing interface.
+- `src/javaflix/ui/` contains the JavaFX application interface.
+- `src/main/resources/javaflix/ui/` contains the JavaFX stylesheet.
 
 ## Build and Run
 
 ### Requirements
 - Java 17+
-- Maven 3.8+ (for tests)
+- Maven 3.8+
 
-### Command line compilation
+### Run the application
 
-From the project root, compile all Java sources:
+From the project root:
 
 ```powershell
-javac -d out (Get-ChildItem src/javaflix -Recurse -Filter *.java | ForEach-Object FullName)
+New-Item -ItemType Directory -Force run-data | Out-Null
+mvn compile
+# If needed, initialize sample data (run from run-data so data stays separate)
+Push-Location run-data
+java -cp ..\target\classes javaflix.InitializeData
+Pop-Location
+mvn javafx:run "-Djavafx.workingDirectory=run-data"
 ```
 
-### Run
+The app stores user and catalog data in `run-data\users.dat` and `run-data\programs.dat`. Keep the two files together.
 
-#### Step 1: Generate the data files
-
-The app stores data using Java serialization. Moving classes into packages changes their serialized class names, so data files created by older versions are not compatible. Back up any existing `users.dat` and `programs.dat` before regenerating them.
-
-Run the following class to create starter data files:
-
-```
-java -cp out javaflix.InitializeData
-```
-This will create `users.dat` and `programs.dat`.
 - All movie and series data were sourced from IMDb.
-- Modify `src/javaflix/InitializeData.java` to add your own programs.
-- Re-run InitializeData to reset the database.
-
-#### Step 2: Run the main application
-
-After generating the data files:
-```
-java -cp out javaflix.Main
-```
+- Modify `src/javaflix/InitializeData.java` to change the sample catalog.
 
 ### Tests
 
