@@ -20,7 +20,7 @@ public class Profile extends JFrame {
         this.user = user;
         profilePanel = new JPanel(new GridLayout(12, 3));
         profilePanel = createProfilePanel();
-        pane.add("Show Profile", profilePanel);
+        pane.add("Profile", profilePanel);
     }
     private JPanel createProfilePanel() {
         profilePanel.add(new JLabel(user.getUsername()));

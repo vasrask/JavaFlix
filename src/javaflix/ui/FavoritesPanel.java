@@ -20,7 +20,7 @@ public class FavoritesPanel extends JFrame {
         favoritesPanel = panel;
         favoritesPanel.setLayout(new BorderLayout());
         updateFavoritesPanel();
-        pane.add("My Favorites", favoritesPanel);
+        pane.add("Favorites", favoritesPanel);
     }
 
     public static void updateFavoritesPanel() {

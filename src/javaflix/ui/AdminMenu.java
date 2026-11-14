@@ -44,10 +44,23 @@ public class AdminMenu <T extends Program> extends JFrame {
 
         new Profile(user, pane);
 
-        new LogOut(pane, this);
-
-        add(pane);
+        add(createMenuContent(pane));
         setVisible(true);
+    }
+
+    private JPanel createMenuContent(JTabbedPane pane) {
+        JPanel content = new JPanel(new BorderLayout());
+        JPanel header = new JPanel(new BorderLayout());
+        header.setBorder(BorderFactory.createEmptyBorder(10, 14, 10, 14));
+
+        JLabel appName = new JLabel("JavaFlix");
+        appName.setFont(appName.getFont().deriveFont(Font.BOLD, 18f));
+        header.add(appName, BorderLayout.WEST);
+        header.add(LogOut.createButton(this), BorderLayout.EAST);
+
+        content.add(header, BorderLayout.NORTH);
+        content.add(pane, BorderLayout.CENTER);
+        return content;
     }
 
     private JPanel createSelectPanel() {

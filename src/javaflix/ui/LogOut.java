@@ -1,27 +1,28 @@
 package javaflix.ui;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class LogOut extends JFrame {
-    JFrame menu;
-    public LogOut(JTabbedPane pane, JFrame menu) {
-        this.menu = menu;
-        JPanel logoutPanel = new JPanel();
-        logoutPanel = createLogoutPanel();
-        pane.add("LogOut", logoutPanel);
-    }
-    private JPanel createLogoutPanel() {
-        JPanel panel = new JPanel();
-        JLabel logoutLabel = new JLabel("Are you sure you want to logout?");
-        panel.add(logoutLabel);
-        JButton logoutButton = new JButton("LogOut");
-        logoutButton.addActionListener(e -> logout());
-        panel.add(logoutButton);
-        return panel;
+public final class LogOut {
+    private LogOut() {
     }
 
-    private void logout() {
-        menu.dispose();
-        new LogIn();
+    public static JButton createButton(JFrame menu) {
+        JButton logoutButton = new JButton("Log out");
+        logoutButton.addActionListener(e -> {
+            int choice = JOptionPane.showConfirmDialog(
+                    menu,
+                    "Are you sure you want to log out?",
+                    "Log out",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE
+            );
+            if (choice == JOptionPane.YES_OPTION) {
+                menu.dispose();
+                new LogIn();
+            }
+        });
+        logoutButton.setAlignmentY(Component.CENTER_ALIGNMENT);
+        return logoutButton;
     }
 }
